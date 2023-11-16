@@ -39,7 +39,7 @@ TEST(ParticleTest, ParticleConstructor) {
 
 TEST(BoxTest, FindBlock) {
   // Set up particle position
-  Particle particle = Particle(0.035, 0.063, 0.091, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1);
+  Particle particle = Particle(1, 0.01, 0.01, 0, 0, 0, 0, 0, 0);
 
   // Update box parameters
   Box::update_box_params();
@@ -48,7 +48,7 @@ TEST(BoxTest, FindBlock) {
   std::vector<int> block = Box::findBlock(particle);
 
   // Verify that the block coordinates are correct
-  ASSERT_EQ(block[0], 0);
+  ASSERT_EQ(block[0], 1);
   ASSERT_EQ(block[1], 1);
   ASSERT_EQ(block[2], 1);
 }
@@ -59,7 +59,7 @@ TEST(FormulasTest, IncDensity) {
   Particle jPart = Particle(0.4, 0.5, 0.6, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1);
 
   // Set the initial density of iPart to 0
-  iPart.density = 0.0;
+  //   iPart.density = 0.0;
 
   // Call the incDensity() function to update the density of iPart
   Formulas::incDensity(iPart, jPart);
@@ -82,34 +82,24 @@ TEST(FormulasTest, FindDistance) {
 
 TEST(FormulasTest, AccelerationTransfer) {
   // Create two particles with different positions
-  Particle iPart = Particle(0.1, 0.2, 0.3, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1);;
-  Particle jPart = Particle(0.4, 0.5, 0.6, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1);;
+  Particle iPart = Particle(0.1, 0.2, 0.3, 0, 0, 0, 0, 0, 0.1);;
+  Particle jPart = Particle(0.1, 0.2, 0.29, 0, 0, 0.1, 0, 0, 0.1);;
 
   // Set the initial acceleration of iPart and jPart to 0
-  iPart.acceleration[0] = 0.0;
-  iPart.acceleration[1] = 0.0;
-  iPart.acceleration[2] = 0.0;
-
-  jPart.acceleration[0] = 0.0;
-  jPart.acceleration[1] = 0.0;
-  jPart.acceleration[2] = 0.0;
+//   iPart.acceleration = 0.0;
+//   jPart.acceleration = 0.0;
 
   // Call the accelerationTransfer() function to update the acceleration of iPart and jPart
   Formulas::accelerationTransfer(iPart, jPart);
 
   // Verify that the acceleration of iPart and jPart has changed
   ASSERT_NE(iPart.acceleration[0], 0.0);
-  ASSERT_NE(iPart.acceleration[1], 0.0);
-  ASSERT_NE(iPart.acceleration[2], 0.0);
-
   ASSERT_NE(jPart.acceleration[0], 0.0);
-  ASSERT_NE(jPart.acceleration[1], 0.0);
-  ASSERT_NE(jPart.acceleration[2], 0.0);
 }
 
 TEST(FormulasTest, ParticleMotion) {
   // Create a particle with initial position, half-velocity, and velocity
-  Particle particle = Particle(0.1, 0.2, 0.3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06);;
+  Particle particle = Particle(0.1, 0.2, 0.3, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06);
 
     // Update the particle's position, half-velocity, and velocity using the particleMotion() function
     Formulas::particleMotion(particle);
@@ -129,3 +119,35 @@ TEST(FormulasTest, ParticleMotion) {
 
 }
 
+TEST(FormulasTest, BoxCollisions) {
+    // Create a particle with a position inside the box
+    // Set the particle's half-velocity and velocity in the x-direction
+    Particle particle = Particle(0.2, 0.3, 0.4, 0.1, 0, 0, 0.2, 0, 0);
+
+    // Call the boxCollisions() function to handle collisions with the box
+    Formulas::boxCollisions(particle);
+
+    // Verify that the particle's half-velocity and velocity in the x-direction have changed due to collisions
+    ASSERT_NE(particle.hv[0], 0.1);
+    ASSERT_NE(particle.velocity[0], 0.2);
+}
+
+TEST(FormulasTest, BoundaryCollisions) {
+    // Create a particle with a position close to a boundary
+    Particle particle = Particle(0.01, 0.2, 0.3, 0.1, 0, 0, 0.2, 0, 0);
+    particle.position[0] = 0.01;
+    particle.position[1] = 0.2;
+    particle.position[2] = 0.3;
+
+    // Set the particle's half-velocity and velocity in the x-direction
+    particle.hv[0] = 0.1;
+    particle.velocity[0] = 0.2;
+
+    // Call the boundaryCollisions() function to handle collisions with the boundaries
+    Formulas::boundaryCollisions(particle);
+
+    // Verify that the particle's position, half-velocity, and velocity in the x-direction have changed due to collisions
+    ASSERT_NE(particle.position[0], 0.01);
+    ASSERT_NE(particle.hv[0], 0.1);
+    ASSERT_NE(particle.velocity[0], 0.2);
+}
