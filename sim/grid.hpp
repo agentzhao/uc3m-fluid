@@ -1,45 +1,81 @@
 #ifndef GRID_HPP
 #define GRID_HPP
-#include <unordered_map>
 #include "block.hpp"
+#include <unordered_map>
 
 // Grid class
 class Grid {
-  public:
-    std::unordered_map<std::vector<int>, Block> blocks;
-    // Information from initial file
-    float ppm;
-    int np;
+private:
+  // All the blocks in the grid
+  std::unordered_map<std::vector<int>, Block> blocks;
 
-    double particleMass;
-    double smoothingLength;
+  // Information from initial file
+  float ppm;
+  int np;
 
-    // Calculating the number of blocks in each dimension...
-    double numberX;
-    double numberY;
-    double numberZ;
-    // Total number of blocks in the grid
-    double numBlocks;
+  double particleMass;
+  double smoothingLength;
 
-    // Calculating the size of grid blocks in each dimension...
-    double sizeX;
-    double sizeY;
-    double sizeZ;
+  // Calculating the number of blocks in each dimension...
+  double numberX;
+  double numberY;
+  double numberZ;
+  // Total number of blocks in the grid
+  double numBlocks;
 
-    // Simulation parameters
-    double slSq;
-    double slCu;
-    double slSixth;
-    double slNinth;
+  // Calculating the size of grid blocks in each dimension...
+  double sizeX;
+  double sizeY;
+  double sizeZ;
 
-    double densTransConstant;
-    double accTransConstant1;
-    double accTransConstant2;
+  // Simulation parameters
+  double slSq;
+  double slCu;
+  double slSixth;
+  double slNinth;
 
-    void update_sim_params();
+  double densTransConstant;
+  double accTransConstant1;
+  double accTransConstant2;
 
-    // Update variables
-    void update_box_params();
+public:
+  // Constructor and Destructor
+  Grid(float ppm, int np);
+  ~Grid();
+
+  // Getters and setters for each variable
+  std::unordered_map<std::vector<int>, Block> get_blocks();
+
+  float get_ppm();
+  int get_np();
+
+  double get_particleMass();
+  double get_smoothingLength();
+
+  double get_numberX();
+  double get_numberY();
+  double get_numberZ();
+
+  double get_numBlocks();
+
+  double get_sizeX();
+  double get_sizeY();
+  double get_sizeZ();
+
+  double get_slSq();
+  double get_slCu();
+  double get_slSixth();
+  double get_slNinth();
+
+  double get_densTransConstant();
+  double get_accTransConstant1();
+  double get_accTransConstant2();
+
+  // Update variables
+  void update_grid();
+
+  // Find the block that a particle belongs in
+  std::vector<int> findBlock(float px, float py, float pz);
 };
 
 #endif // GRID_HPP
