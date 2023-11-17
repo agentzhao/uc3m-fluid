@@ -61,17 +61,17 @@ int parser(int argc, char **argv) {
   while (!input_file.eof()) {
     count += 1;
     // Read particle values
-    float px = read_binary_value<float>(input_file);
-    float py = read_binary_value<float>(input_file);
-    float pz = read_binary_value<float>(input_file);
-    float hvx = read_binary_value<float>(input_file);
-    float hvy = read_binary_value<float>(input_file);
-    float hvz = read_binary_value<float>(input_file);
-    float vx = read_binary_value<float>(input_file);
-    float vy = read_binary_value<float>(input_file);
-    float vz = read_binary_value<float>(input_file);
+    auto px = read_binary_value<float>(input_file);
+    auto py = read_binary_value<float>(input_file);
+    auto pz = read_binary_value<float>(input_file);
+    auto hvx = read_binary_value<float>(input_file);
+    auto hvy = read_binary_value<float>(input_file);
+    auto hvz = read_binary_value<float>(input_file);
+    auto vx = read_binary_value<float>(input_file);
+    auto vy = read_binary_value<float>(input_file);
+    auto vz = read_binary_value<float>(input_file);
 
-    particles.push_back(Particle(px, py, pz, hvx, hvy, hvz, vx, vy, vz));
+    particles.emplace_back(Particle(px, py, pz, hvx, hvy, hvz, vx, vy, vz));
   }
 
   if (count == np) {
