@@ -6,9 +6,12 @@
 
 int main(int argc, char **argv) {
   // arguments
-  std::array<char *, 4> args = {argv[0], argv[1], argv[2], argv[3]};
-  if (progargs(argc, args) == 0) {
-    parser(args);
+  std::span const args_view{argv, static_cast<std::size_t>(argc)};
+  std::vector<std::string> const arguments{args_view.begin() + 1,
+                                           args_view.end()};
+
+  if (progargs(argc, arguments) == 0) {
+    parser(arguments);
   }
 
   return 0;

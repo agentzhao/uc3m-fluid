@@ -6,13 +6,14 @@
 #include "particle.hpp"
 #include "simulation.hpp"
 #include <array>
+#include <cctype>
 #include <fstream>
 #include <iostream>
 #include <locale>
 #include <utility>
 #include <vector>
 
-int parser(std::array<char *, 4> args);
+int parser(std::vector<std::string> arguments);
 
 // read binary value from file
 Grid readInput(const std::string &inputfile);

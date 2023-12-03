@@ -46,9 +46,9 @@ public:
                             double accTransConstant1, double accTransConstant2);
 
   // helper function for accelerationTransfer
-  std::vector<double> addVectors(std::vector<double> vec1,
+  static std::vector<double> addVectors(std::vector<double> vec1,
                                  std::vector<double> vec2);
-  std::vector<double> subtractVectors(std::vector<double> vec1,
+  static std::vector<double> subtractVectors(std::vector<double> vec1,
                                       std::vector<double> vec2);
 
   // Particle motion

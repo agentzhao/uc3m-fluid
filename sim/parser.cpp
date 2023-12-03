@@ -30,10 +30,10 @@ void write_binary_value(T value, std::ostream &os) {
   os.write(as_buffer(value), sizeof(value));
 }
 
-int parser(std::array<char *, 4> args) {
-  int const nts = std::stoi(args[1]); // number of time steps
-  std::string const inputfile = args[2];
-  std::string const outputfile = args[3];
+int parser(std::vector<std::string> arguments) {
+  int const nts = std::stoi(arguments[0]); // number of time steps
+  std::string const inputfile = arguments[1];
+  std::string const outputfile = arguments[2];
 
   // Read input file
   Grid grid = readInput(inputfile);
