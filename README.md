@@ -5,20 +5,28 @@
 In root directory
 
 ```
-mkdir cmake-build-debug && cd cmake-build-debug && cmake ..
+mkdir cmake-build-debug && cd cmake-build-debug && cmake .. && cd ..
 cmake --build cmake-build-debug
 ```
 
-### To run
+run
 
 ```
-cmake-build-debug/fluid/fluid 1 small.fld out/test.fld
+touch out/output.fld
+cmake-build-debug/fluid/fluid 1 small.fld out/output.fld
 ```
 
-### Testing
+test
 
 ```
 cmake-build-debug/utest/utest
+```
+
+### or
+
+```
+./buildandrun.sh
+./testrun.sh
 ```
 
 ### Clang-tidy fixes

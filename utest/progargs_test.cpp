@@ -4,7 +4,7 @@
 TEST(ProgargsTest, ValidInput) {
   int const argc = 4;
   std::vector<std::string> const arguments = {"10", "small.fld",
-                                              "out/test.fld"};
+                                              "out/output.fld"};
 
   int const result = progargs(argc, arguments);
 
@@ -23,7 +23,7 @@ TEST(ProgargsTest, InvalidNumberOfArguments) {
 TEST(ProgargsTest, InvalidTimeSteps) {
   int const argc = 4;
   std::vector<std::string> const arguments = {"aa", "small.fld",
-                                              "out/test.fld"};
+                                              "out/output.fld"};
 
   int const result = progargs(argc, arguments);
 
@@ -33,7 +33,7 @@ TEST(ProgargsTest, InvalidTimeSteps) {
 TEST(ProgargsTest, NegativeTimeSteps) {
   int const argc = 4;
   std::vector<std::string> const arguments = {"-10", "small.fld",
-                                              "out/test.fld"};
+                                              "out/output.fld"};
 
   int const result = progargs(argc, arguments);
 
@@ -43,7 +43,7 @@ TEST(ProgargsTest, NegativeTimeSteps) {
 TEST(ProgargsTest, CannotOpenInputFile) {
   int const argc = 4;
   std::vector<std::string> const arguments = {"10", "nonexistent.fld",
-                                              "out/test.fld"};
+                                              "out/output.fld"};
 
   int const result = progargs(argc, arguments);
 
