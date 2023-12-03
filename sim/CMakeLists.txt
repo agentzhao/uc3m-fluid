@@ -13,6 +13,7 @@ simulation.cpp
 constants.hpp
 particle.hpp
 particle.cpp
+hash.hpp
 hash.cpp
 )
 # Use this line only if you have dependencies from stim to GSL

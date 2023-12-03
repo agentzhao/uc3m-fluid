@@ -5,6 +5,7 @@ const int sixtyfour = 64;
 const int nine = 9;
 const int fifteen = 15;
 const int fourtyfive = 45;
+const int six = 6;
 
 // Constructor and Destructor
 Grid::Grid(float ppm, int np)

@@ -34,5 +34,5 @@ add_subdirectory(sim)
 add_subdirectory(fluid)
 # Unit tests and functional tests
 enable_testing()
-# add_subdirectory(utest)
-# add_subdirectory(ftest)
+add_subdirectory(utest)
+add_subdirectory(ftest)

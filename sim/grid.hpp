@@ -2,7 +2,7 @@
 #define GRID_HPP
 #include "block.hpp"
 #include "constants.hpp"
-#include "hash.cpp"
+#include "hash.hpp"
 #include <iostream>
 #include <ostream>
 #include <unordered_map>
