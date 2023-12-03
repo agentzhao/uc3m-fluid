@@ -2,15 +2,23 @@
 
 ### To build
 
+In root directory
+
 ```
 mkdir cmake-build-debug && cd cmake-build-debug && cmake ..
 cmake --build cmake-build-debug
 ```
 
-run
+### To run
 
 ```
 cmake-build-debug/fluid/fluid 1 small.fld out/test.fld
+```
+
+### Testing
+
+```
+cmake-build-debug/utest/utest
 ```
 
 ### Clang-tidy fixes
